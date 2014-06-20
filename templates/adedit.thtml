@@ -1,3 +1,6 @@
+{!if show_htmleditor}
+{wysiwyg}
+{!endif}
 <div class="block-box">
  <span class="block-helpicon">
   {delete_link}

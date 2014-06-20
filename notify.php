@@ -105,7 +105,7 @@ function catNotify($ad_id = '')
         $T->set_var('subject', $subject);
         $T->set_var('description', $descript);
         $T->set_var('username', COM_getDisplayName($row['uid']));
-        $T->set_var('ad_url', CLASSIFIEDS_URL . "/index.php?mode=detail&id=$ad_id");
+        $T->set_var('ad_url', "{$_CONF['site_url']}/{$_CONF_ADVT['pi_name']}/index.php?mode=detail&id=$ad_id");
         $T->set_var('price', $price);
         $T->set_var('ad_type', $ad_type);
         $T->parse('output','message');
@@ -150,14 +150,7 @@ function catSubscribe($cat)
     if (COM_isAnonUser())
         return;
 
-    // Check for an existing record, just in case.
-    $curval = (int)DB_getItem($_TABLES['ad_notice'], 'notice_id',
-                "uid='{$_USER['uid']}' AND cat_id='{$cat}'");
-    if ($curval == 0) {
-        DB_query("INSERT INTO {$_TABLES['ad_notice']}
-                (cat_id, uid)
-                VALUES ('{$cat}', '{$_USER['uid']}')");
-    }
+    DB_save($_TABLES['ad_notice'], "cat_id,uid", "$cat,{$_USER['uid']}");
 
 }   // function catSubscribe
 
@@ -262,7 +255,7 @@ function CLASSIFIEDS_notifyApproval($ad_id, $approved=TRUE)
     $T->set_var('cat', DB_getItem($_TABLES['ad_category'], 'cat_name',
         'cat_id='. intval($row['cat_id'])));
     $T->set_var('ad_type', AdType::GetDescription($A['ad_type']));
-    $T->set_var('ad_url', CLASSIFIEDS_URL . "/index.php?mode=detail&id=$ad_id");
+    $T->set_var('ad_url', "{$_CONF['site_url']}/{$_CONF_ADVT['pi_name']}/index.php?mode=detail&id=$ad_id");
 
     $T->parse('output','message');
     $message = $T->finish($T->get_var('output'));
@@ -398,6 +391,7 @@ function CLASSIFIEDS_notifyAdmin($A)
     $T->set_var('subject', $A['subject']);
     $T->set_var('description', $A['descript']);
     $T->set_var('username', COM_getDisplayName(2));
+    //$T->set_var('ad_url', "{$_CONF['site_url']}/{$_CONF_ADVT['pi_name']}/index.php?mode=detail&id={$A['ad_id']}");
     $T->set_var('price', $A['price']);
     $T->set_var('ad_type', $ad_type);
     $T->parse('output','message');
@@ -428,8 +422,8 @@ function CLASSIFIEDS_notifyAdmin($A)
     for ($i=0; $i < $nRows; $i++) {
         $row = DB_fetchArray($result);
         if ($row['email'] != '') {
-            /*CLASSIFIEDS_auditLog("Classifieds Submit: Sending notification email to: " . 
-                    $row['email'] . " - " . $row['username']);*/
+            COM_errorLog("Classifieds Submit: Sending notification email to: " . 
+                    $row['email'] . " - " . $row['username']);
             COM_mail(
                 array($row['email'], $row['username']),
                 "{$LANG_ADVT['you_have_new_ad']} {$_CONF['site_name']}",

@@ -459,15 +459,6 @@ class adCategory
                 $_CONF_ADVT['catimgurl'] . '/' . $this->image); 
         }
 
-        // Build permissions block
-        $catinfo = '';
-        while ($row = DB_fetchArray($result)) {
-            $catinfo .= "<input type=\"checkbox\" name=\"c[]\" value=\"{$row['cat_id']}\">
-                <a href=\"$PHP_SELF?cat={$row['cat_id']}\">$cat_name</a>(" 
-                . findTotalAds( $row['cat_id'] ) . ")<br>\n";
-        }
-        $T->set_var('catinfo', $catinfo);
-
         $T->parse('output','modify');
         $display .= $T->finish($T->get_var('output'));
         return $display;

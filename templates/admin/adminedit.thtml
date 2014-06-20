@@ -6,6 +6,10 @@ window.addEvent('domready',function() {
 });
 -->
 </script>
+{!if show_htmleditor}
+{wysiwyg}
+{!endif}
+
 <br />
 <div class="block-box">
   <h2>{txt_edit_type}</h2>

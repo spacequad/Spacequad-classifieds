@@ -38,7 +38,27 @@ function CLASSIFIEDS_submitForm($mode = 'submit', $A)
     $time = time();     // used to compare now with expiration date
 
     $T = new Template(CLASSIFIEDS_PI_PATH . '/templates');
-    if (isset($_CONF['advanced_editor']) && $_CONF['advanced_editor'] == 1) {
+    $T->set_file('adedit', "submit.thtml");
+
+    // Set up the wysiwyg editor, if available
+    switch (PLG_getEditorType()) {
+    case 'ckeditor':
+        $T->set_var('show_htmleditor', true);
+        PLG_requestEditor('classifieds','classifieds_entry','ckeditor_classifieds.thtml');
+        PLG_templateSetVars('classifieds_entry', $T);
+        break;
+    case 'tinymce' :
+        $T->set_var('show_htmleditor',true);
+        PLG_requestEditor('classifieds','classifieds_entry','tinymce_classifieds.thtml');
+        PLG_templateSetVars('classifieds_entry', $T);
+        break;
+    default :
+        // don't support others right now
+        $T->set_var('show_htmleditor', false);
+        break;
+    }
+
+    /*if (isset($_CONF['advanced_editor']) && $_CONF['advanced_editor'] == 1) {
         $editor_type = '_advanced';
         $postmode_adv = 'selected="selected"';
         $postmode_html = '';
@@ -72,7 +92,7 @@ function CLASSIFIEDS_submitForm($mode = 'submit', $A)
                 time() + 1200, $_CONF['cookie_path'],
                 $_CONF['cookiedomain'], 
                 $_CONF['cookiesecure']);
-
+*/
 
     // Get the category info from the form variable, if any.  If not,
     // get the first category so we can get the keywords.

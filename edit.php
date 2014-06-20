@@ -46,36 +46,33 @@ function adEdit($A, $mode = 'edit', $admin=false)
 
     $time = time();     // used to compare now with expiration date
 
-    if (isset($_CONF['advanced_editor']) && $_CONF['advanced_editor'] == 1) {
-        $editor_type = '_advanced';
-        $postmode_adv = 'selected="selected"';
-        $postmode_html = '';
-    } else {
-        $editor_type = '';
-        $postmode_adv = '';
-        $postmode_html = 'selected="selected"';
-    }
-
     if ($admin) {
         $T = new Template(CLASSIFIEDS_PI_PATH . '/templates/admin');
-        $T->set_file('adedit', "adminedit{$editor_type}.thtml");
+        $T->set_file('adedit', "adminedit.thtml");
         $action_url = CLASSIFIEDS_ADMIN_URL . '/index.php';
     } else {
         $T = new Template(CLASSIFIEDS_PI_PATH . '/templates');
-        $T->set_file('adedit', "submit{$editor_type}.thtml");
+        $T->set_file('adedit', "submitform.thtml");
         $action_url = CLASSIFIEDS_URL . '/index.php';
     }
 
-    if ($editor_type == '_advanced') {
-        $T->set_var('show_adveditor','');
-        $T->set_var('show_htmleditor','none');
-    } else {
-        $T->set_var('show_adveditor','none');
-        $T->set_var('show_htmleditor','');
+    // Set up the wysiwyg editor, if available
+    switch (PLG_getEditorType()) {
+    case 'ckeditor':
+        $T->set_var('show_htmleditor', true);
+        PLG_requestEditor('classifieds','classifieds_entry','ckeditor_classifieds.thtml');
+        PLG_templateSetVars('classifieds_entry', $T);
+        break;
+    case 'tinymce' :
+        $T->set_var('show_htmleditor',true);
+        PLG_requestEditor('classifieds','classifieds_entry','tinymce_classifieds.thtml');
+        PLG_templateSetVars('classifieds_entry', $T);
+        break;
+    default :
+        // don't support others right now
+        $T->set_var('show_htmleditor', false);
+        break;
     }
-
-    $post_options = "<option value=\"html\" $postmode_html>{$LANG_postmodes['html']}</option>";
-    $post_options .= "<option value=\"adveditor\" $postmode_adv>{$LANG24[86]}</option>";
 
     switch ($mode) {
         case 'editsubmission':
@@ -250,40 +247,6 @@ function adEdit($A, $mode = 'edit', $admin=false)
         'cancel_url'        => $cancel_url,
     ) );
 
-
-    // Set the prompt values:
-    /*$T->set_var('category', $LANG_ADVT['category']);
-    $T->set_var('subject', $LANG_ADVT['subject']);
-    $T->set_var('description', $LANG_ADVT['description']);
-    $T->set_var('addit_info', $LANG_ADVT['addit_info']);
-    $T->set_var('website', $LANG_ADVT['website']);
-    $T->set_var('photo', $LANG_ADVT['photo']);
-    $T->set_var('photo_thumb', $LANG_ADVT['photo_thumb']);
-    $T->set_var('image_max', $LANG_ADVT['image_max']);
-    $T->set_var('txt_days', 'days');
-    $T->set_var('txt_type', $LANG_ADVT['ad_type']);*/
-    //$T->set_var('txt_forsale', $LANG_ADVT['forsale']);
-    //$T->set_var('txt_wanted', $LANG_ADVT['wanted']);
-    //$T->set_var('txt_delete_confirm', $MESSAGE[76]);
-    //$T->set_var('delete_btn', '<input type="submit" name="mode" value="'.$LANG_ADMIN['delete'].'" onclick="return confirm(\''.$MESSAGE[76].'\');">');
-
-    //$img_max = $_CONF['max_image_size']  / 1048576;    // Show in MB
-    //$T->set_var('txt_photo', "{$LANG_ADVT['photo']}<br />".
-    //        sprintf($LANG_ADVT['image_max'], $img_max));
-
-    /*$T->set_var('ad_visibility', $LANG_ADVT['ad_visibility']);
-    $T->set_var('type', $type);
-    $T->set_var('action_url', $action_url);
-    $T->set_var('max_file_size', $_CONF['max_image_size']);*/
-
-    // Sanitize entries from the database
-/*    $A['subject'] = htmlspecialchars($A['subject']); 
-    $A['descript'] = htmlspecialchars($A['descript']);
-    $A['keywords'] = htmlspecialchars($A['keywords']);
-    $A['price'] = htmlspecialchars($A['price']);
-    $A['url'] = htmlspecialchars($A['url']);
-    $A['ad_type'] = (int)$A['ad_type'];*/
-
     // set expiration & duration based on existing info
     if ($A['exp_date'] == '') {
         $T->set_var('row_exp_date', '');
@@ -292,26 +255,6 @@ function adEdit($A, $mode = 'edit', $admin=false)
     } else {
         $T->set_var('row_exp_date', date("d M Y", $A['exp_date'])); 
     }
-
-    /*$T->set_block('adedit', 'DeleteLink', 'DelLink');
-    $T->set_var('ad_id', $A['ad_id']);
-    //$T->set_var('lang_confirmdelete', $MESSAGE[76]);
-    $T->parse('adedit', 'DelLink', false);*/
-
-    /*$T->set_var('row_cat_id', $A['cat_id']);
-    $T->set_var('row_ad_id', $A['ad_id']);
-    $T->set_var('row_subject', $A['subject']);
-    $T->set_var('row_descript', $A['descript']);
-    $T->set_var('row_price', $A['price']);
-    $T->set_var('row_url', $A['url']);
-    $T->set_var('keywords', $A['keywords']);
-    $T->set_var('exp_date', $A['exp_date']);
-    $T->set_var('add_date', $A['add_date']);
-    $T->set_var('ad_type_selection', 
-        AdType::makeSelection($A['ad_type']));*/
-
-    // Set up the category dropdown
-    //$T->set_var('sel_list_catid', CLASSIFIEDS_buildCatSelection($A['cat_id']));
 
     // Set up permission editor on the admin template if needed.
     // Otherwise, set hidden values with existing permissions
@@ -324,10 +267,6 @@ function adEdit($A, $mode = 'edit', $admin=false)
                             $A['perm_members'],$A['perm_anon']),
             'group_dropdown'    => SEC_getGroupDropdown($A['group_id'], 3),
         ) );
-        //$T->set_var('lang_group', $LANG_ACCESS['group']);
-        //$T->set_var('lang_owner', $LANG_ACCESS['owner']);
-        //$T->set_var('lang_permissions', $LANG_ACCESS['permissions']);
-
     } else {
         $ownername = COM_getDisplayName($A['owner_id']);
         $T->set_var(array(
@@ -367,13 +306,10 @@ function adEdit($A, $mode = 'edit', $admin=false)
     }
 
     // add upload fields for unused images
-    //$upload_field  = '';
     $T->set_block('adedit', 'UploadFld', 'UFLD');
     for ($j = $i; $j < $_CONF_ADVT['imagecount']; $j++) {
         $T->parse('UFLD', 'UploadFld', true);
-        //$upload_field .= "<input type=\"file\" name=\"photo[]\"><br />\n";
     }
-    //$T->set_var('prow_photo', $upload_field);
 
     $T->parse('output','adedit');
     return $T->finish($T->get_var('output'));

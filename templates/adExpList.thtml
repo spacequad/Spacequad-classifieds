@@ -17,7 +17,7 @@
   {!endif}
   <!-- BEGIN QueueRow -->
   <tr class="detail">
-    <td height="25" align="left">{ad_type} ({cmt_count}):
+    <td height="25" align="left">{ad_type}:
     </td>
     <td height="25" bgcolor="{bgColor}">
       <a href="{ad_url}">{subject}</a>
