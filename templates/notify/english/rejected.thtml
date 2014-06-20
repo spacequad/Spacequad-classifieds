@@ -1,0 +1,10 @@
+Hello, {username},
+<p />
+Your ad on {site_name} has been rejected.  You may contact the site administrator for more information.
+<p />
+{ad_type}: {subject}<br />
+Description: {descript}<br />
+Price: {price}<br />
+<p />
+Category: {cat}<br />
+

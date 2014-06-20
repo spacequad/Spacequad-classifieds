@@ -1,0 +1,10 @@
+Hello, {username},
+<p />
+There is a new ad listed on {site_name} for your review.  Click <a href={admin_url}>here</a> to approve or reject this ad.
+<p />
+{ad_type}: {subject}<br />
+Description: {description}<br />
+Price: {price}<br />
+<p />
+Category: {cat}<br />
+

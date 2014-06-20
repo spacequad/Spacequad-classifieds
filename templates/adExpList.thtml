@@ -1,0 +1,95 @@
+{# begin {templatelocation} #}
+<p {xhtml}>
+{pagemenu}<p {xhtml}>
+<table border="0" cellpadding="1" cellspacing="0" width="100%">
+  <tr>
+    <th width=20%></th>
+    <th width=50%>{$LANG_ADVT['subject']}</th>
+    <th width=15%>{$LANG_ADVT['category']}</th>
+    <th width=15%><center>{$LANG_ADVT['added_on']}&nbsp;&nbsp;</center></th>
+  </tr>
+  {!if no_ads}
+  <tr>
+    <td width="100%" height="25" colspan="5" align="center">
+      <b>{no_ads}</b>
+    </td>
+  </tr>
+  {!endif}
+  <!-- BEGIN QueueRow -->
+  <tr class="detail">
+    <td height="25" align="left">{ad_type} ({cmt_count}):
+    </td>
+    <td height="25" bgcolor="{bgColor}">
+      <a href="{ad_url}">{subject}</a>
+      <!--<a href="?page=detail&cat={cat_id}&id={ad_id}">{subject}</a>-->
+    </td>
+    <td><small><a href="{cat_url}">{cat_name}</a></small></td>
+    <td height="25" align="center"><small>{add_date}</small>&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="120">
+      {!if img_url}
+        <a href="{img_url}" rel="slimbox" target="_blank">
+          <img src="{thumb_url}" border="0" 
+            alt="{$LANG_ADVT['click_to_enlarge']}" 
+            width="{thumb_width}" height="{thumb_height}" {xhtml}>
+        </a>
+        <br {xhtml}>
+      {!else}
+        <br {xhtml}>
+        <span style="color:#808080;size:small;">{$LANG_ADVT[no_image]}</span>
+      {!endif}
+    </td>
+    <td valign="top" colspan="4">
+      {descript}{ellipses}
+      <p {xhtml}>
+      {!if price}
+        {$LANG_ADVT['price']}: {price}
+      {!endif}
+    </td>
+  </tr>
+  <tr>
+    <td colspan="5" align="right">
+      <a href="?page=detail&cat={cat_id}&id={ad_id}"><small>{txt_more}</small></a>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="5" align="center">
+      <table border=0 width=100%>
+        <tr>
+          <td colspan="5">{txt_addit_info}</td>
+        </tr>
+        <tr>
+          <td>{name00}</td>
+          <td>{name01}</td>
+          <td>{name02}</td>
+          <td>{name03}</td>
+          <td>{name04}</td>
+        </tr>
+        <tr>
+          <td>{value00}</td>
+          <td>{value01}</td>
+          <td>{value02}</td>
+          <td>{value03}</td>
+          <td>{value04}</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <!-- END QueueRow -->
+
+  <tr>
+    <td width="100%" height="1" colspan="5" bgcolor="#808080"></td>
+  </tr>
+  <tr>
+    <td width="100%" height="20" colspan="5"><small>
+      {$LANG_ADVT['found']}<b>{totalAds}</b>{$LANG_ADVT['listings']}
+      <b>{adsStart}</b> - <b>{adsEnd}</b></small>
+    </td>
+  </tr>
+</table>
+
+<p align="center">
+{pagemenu}
+</p>
+{# end {templatelocation} #}

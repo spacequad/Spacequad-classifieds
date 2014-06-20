@@ -1,0 +1,32 @@
+{# begin {templatelocation} #}
+{menu}
+<!-- BEGIN CatDiv -->
+<a href="{cat_url}">
+  <div class="adcat" style="background-color:{bgcolor}; cursor:pointer;">
+    <!--<div class="catTitle" style="background:{hdcolor}">-->
+    <div class="catTitle">
+     <font color="{fgcolor}">
+        {cat_name}
+      </font>
+    </div>
+    {!if cat_image}
+    <div class="catImage" style="cursor:pointer;">
+      <a href="{cat_url}">
+      <img class="catImage" src="{cat_image}" {xhtml}>
+      </a>
+    </div>
+    {!endif}
+    <div class="catDesc">
+      <font color="{fgcolor}">
+        {cat_desc}
+      </font>
+    </div>
+    <div class="catAdCount">
+      <font color="{fgcolor}">
+        {$LANG_ADVT['postings']}: {cat_ad_count}
+      </font>
+    </div>
+  </div>
+</a>
+<!-- END CatDiv -->
+{# end {templatelocation} #}

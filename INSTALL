@@ -1,0 +1,98 @@
+Install/Uninstall instruction for the GLFusion classifieds plugin.
+
+The Classifieds plugin supports the automatic plugin upload and installation
+offered by glFusion 1.1.2 and later.  This is the recommended method.
+
+If you are unable to use the automatic method, the manual method is still
+supported.
+
+
+MANUAL INSTALLATION
+
+Step 1:  Back up your GLFusion Database.  The classifieds plugin adds tables 
+to your GLFusion database. You can do this with the built in admin backup 
+facility.
+
+Step 2:  Uncompress the classifieds plugin archive while in the 
+<private_dir>/plugins directory.  The archive will create a 
+directory called classifieds in the plugins directory.
+
+Step 3:  Create the public_html and admin directories.  Under your html 
+directory (usually public_html) create a directory called classifieds.  
+Under your admin/plugins/ directory create a directory called classifieds.
+
+Step 4:  Change to your <private_dir>/plugins/classifieds/ directory.
+Copy the files in the admin directory to the admin/plugins/classifieds/ 
+directory your created in step 3.  Copy the files and directories in the 
+public_html directory to the public_html/classifieds/ directory you created 
+in step 3.
+
+Change permission on images directory:
+
+    chmod -R 777 images
+
+Step 5:  Log in to your GLFusion as a root user, chose Plugins from Admin 
+Block. You will see the new plugin awaiting installation. Click Install. 
+The install page will tell you if the install was successful or not.  If not 
+examine GLFusion system error log for possible problems.
+
+The classifieds plugin should now be installed and functioning.  Clicking on 
+the classifieds Icon will take you to the admin page where you can add your 
+own categories and subcategories.  Visit the site Configuration section to 
+set system options for the Classifieds plugin.
+
+
+UPGRADING (Manual):
+
+Perform the same steps as for a new installation.  The static configuration 
+items have been moved from config.php to classifieds.php; config.php is no 
+longer necessary unless you have customized your settings.  If you have no 
+custom configuration items, remove the config.php file.
+
+You should clear the template cache after performing the update since the 
+template files may have changed.
+
+You should also visit the site configuration area and check the configuration 
+for the Classifieds plugin.  Even if you make no changes, click "Save" to push 
+any new configuration items into the cache.
+
+
+REMOVAL:
+
+Step 1:  Go to Admin Block/Plugins. Find the plugin in the list of plugins, 
+click the number. Then press Delete, confirm (or not) deletion, this will 
+remove all the plugin data from your database.
+
+Step 2:  Delete the three plugin directories created in the install process:  
+    <private_dir>plugins/classifieds/
+    <public_html>/classifieds/
+    <public_html>/admin/plugins/classifieds/
+
+Thats it.
+
+
+NOTIFICATION TEMPLATES:
+
+Templates for notification email messages are located in 
+<plugins>/classifieds/templates/notify/<language>.  There are two templates: 
+admin.thtml for messages to the administrator, and subscriber.html for messages 
+to category subscribers.  If you'd like to change the appearance of the email 
+messages, simply edit the templates. 
+
+English-language templates are provided and will be used if templates are not
+available for the recipient's language.
+
+The following variables are set by the plugin:
+{username}  -   The recipient's username or full name, depending on the site 
+                configuration.
+{site_url}  -   Base URL for your site
+{admin_url} -   URL to the plugin administration screen
+{ad_url}    -   The URL to the ad detail page
+{site_name} -   Your site name
+{ad_type}   -   The ad type ("For Sale", "Wanted", "To Trade", etc.)
+{subject}   -   The subject of the ad
+{description} - The complete description field for the ad
+{price}     -   The price
+{cat}       -   The ad's category
+
+

@@ -1,0 +1,9 @@
+Hello, {username},
+<p />
+You have {num_ads} classified ads on {site_name} which are near expiration.
+<p />
+Log into <a href="{site_url}/{pi_name}/index.php?mode=manage">{site_url}/{pi_name}/index.php?mode=manage</a> to review them.
+<p />
+Sincerely,
+{site_name}
+

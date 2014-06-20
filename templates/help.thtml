@@ -1,0 +1,25 @@
+{# begin {templatelocation} #}
+<h2>How to List an Ad</h2>
+<ul>
+    <li><a href="{site_url}/users.php">Login</a> first.  If you are not a memeber please <a href="{site_url}/users.php?mode=new">register</a> first.</li>
+    <li>Select a specific category and click on <b>List an Ad.</b></li>
+    <li>Enter as much information as you can.  You can upload 5 pictures at the same time, all images have to be type JPEG.(<b>Note:</b> It may take long time to upload large size images.)</li>
+</ul>
+
+<h2>How to Edit Your Ad</h2>
+<ul>
+    <li><a href="{site_url}/users.php">Login</a> to your account first.  Click on <b>Ads Management</b>.</li>
+    <li>You can update your ads information, extend your ad duration date, add/delete pictures and delete ads.</li>
+</ul>
+
+<h2>How to Edit Your Personal Information</h2>
+<ul>
+    <li><a href="{site_url}/users.php">Login</a> to your account first.  Click on <b>Account Information</b>.</li>
+    <li>Change your information.</li>
+</ul>
+
+<h2>How to Recover Your Password</h2>
+<ul>
+    <li>Click <a href="{site_url}/users.php?mode=getpassword">here</a>.
+</ul>
+{# end {templatelocation} #}

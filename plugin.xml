@@ -1,0 +1,12 @@
+<plugin>
+    <id>classifieds</id>
+    <name>Classified Ads</name>
+    <description>Classified Ads</description>
+    <version>1.0.6</version>
+    <glfusionversion>1.3.0</glfusionversion>
+    <phpversion>5.2.0</phpversion>
+    <dataproxydriver>classifieds.class.php</dataproxydriver>
+    <url>http://www.leegarner.com</url>
+    <maintainer>Lee Garner</maintainer>
+    <requires>lglib</requires>
+</plugin>
