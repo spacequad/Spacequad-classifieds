@@ -1,0 +1,88 @@
+<h1>Installation &amp; Removal instructions for the GLFusion Classifieds plugin.</h1>
+
+<h2>INSTALLATION</h2>
+<h3>Manual Installation</h3>
+<ol>
+<li>Back up your GLFusion Database.  The classifieds plugin adds tables to your GLFusion database.  You can do this with the built in admin backup facility.</li>
+<li>Uncompress the classifieds plugin archive while in the &lt;glfusion_dir&gt;/plugins directory.  The archive will create a directory called classifieds in the plugins directory.</li>
+<li>Create the public_html and admin directories.  Under your html directory (usually public_html) create a directory called classifieds.  Under your admin/plugins/ directory create a directory called classifieds.</li>
+<li>Change to your &lt;glfusion_dir&gt;/plugins/classifieds/ directory.  Copy the files in the admin directory to the admin/plugins/classifieds/ directory your created in step 3.  Copy the files and directories in the public_html directory to the public_html/classifieds/ directory your created in step 3.  Finally, copy the files from the docs/ directory to &lt;glfusion_dir&gt;/public_html/docs/.</li>
+<li>Log in to your GLFusion as a root user and run install.php in your admin/plugins/classifieds/ directory. The install page will tell you if the install was successful or not.  If not examine GLFusion system errorlog for possible problems.<br />
+The classifieds plugin should now be installed and functioning.  Clicking on the classifieds Icon will take you to the admin page.</li>
+<li>Set up security.  On installation only the root users have access to classifieds administration and Viewing. You can delegate control for either of these functions through the user and group editors.</li>
+<li><b>Make sure the image upload directory is writeable by your web server.</b>  When executed from within the public_html/classifieds directory, either of these methods should take care of it:
+  <ul><li><b><code>chmod -R 777 images</code></b></li>
+  <li><b><code>chown -r &lt;username&gt;</code></b> where <code>&lt;username&gt;</code> is the username of your web server process, such as "httpd", "webservd", etc.  </li></ul><i>Note:  You'll probably want to ensure that all directories are writable by the web server to take advantage of the automatic plugin installation capability of glFusion 1.1.2 and later.</i></li>
+<li>Most likely you'll want to be sure that GLFusion is using ImageMagick rather than GDLib for image processing.</li>
+</ol>
+
+<h3>Automatic Installation</h3>
+Classifieds version 0.3 supports the automatic plugin installer of glFusion 1.1.2.  To install the plugin, simply upload the archive to the Plugins page and click "Install".
+
+<h2>UPGRADING:</h2>
+<b>Back up your database!</b>
+<ol>
+<li>From version 0.1.x:
+  <ol>
+  <li><b>Review your ad submissions and approve or delete all ads.</b> Beginning with version 0.2, all ads in the ad table are considered "approved", while all unapproved ads are in the submissions table.  This mean that the upgrade process will effectively approve all ads.
+  <li>Copy the files as shown above.</li>
+  <li>If you did not customize your config.php file, then delete it.  Classifieds no longer requires a config.php file.  Otherwise, check your custom file against the new classifieds.php to be sure that all of the necessary tables are defined.  <b>Note that there is a new table as of version 0.2</b></li>
+  </ol>
+</li>
+<li>From version 0.2.x:
+  <br />Version 0.3 introduces compatibility with the automatic plugin installation of glFusion 1.1.2. Some files have changed.  The update function will attempt to make these changes for you, but check the error log to see if anything failed.
+  <ul><li>Manual Upgrade (glFusion 1.1.1 and prior):
+    <ol>
+    <li>Copy the new plugin files into place under the private, public_html and admin directories.</li>
+    <li>Make sure that <b>all</b> files are writable by your web server.</li>
+    <li>Update the plugin</li>
+    <li>Check that config.php no longer exists, <b>unless</b> you have custom settings.  If you do, make sure that they're complete by comparing against classifieds.php.</li>
+    </ol>
+  </li>
+  <li>Automatic (glFusion 1.1.2 and later)
+    <ol><li>Upload the plugin archive and update it automatically</li>
+    <li>Your config.php file should be renamed to config.03.php.  If you have custom settings in your existing config.php then you'll need to rename it back.</li>
+    </ol>
+  </li>
+  </ul>
+</li>
+<li>Clear the template cache.</li>
+<li>Visit the site configuration area and save the Classifieds configuration.  This pushes new settings into the configuration cache.</li>
+</ol>
+
+<h2>REMOVING:</h2>
+<ol>
+<li>Run the install.php page in your admin/plugins/classifieds directory.  This will remove all the data from your database.</li>
+<li>Delete the three plugin directories created in the install process:  &lt;glfusion-dir&gt;/plugins/classifieds/, &lt;public_html&gt;/classifieds/ and &lt;admin&gt;/plugins/classifieds/</li>
+</ol>
+<p />
+<h2>NOTIFICATION TEMPLATES:</h2>
+Templates for notification email messages are located in &lt;plugins&gt;/classifieds/templates/notify/&lt;language&gt;.  There are two templates: admin.thtml for messages to the administrator, and subscriber.html for messages to category subscribers.  If you'd like to change the appearance of the email messages, simply edit the templates. 
+<p />
+The following variables are set by the plugin:
+<ul>
+<li>{username} - The recipient's username or full name, depending on the site configuration.</li>
+<li>{site_url} - Base URL for your site</li>
+<li>{admin_url} - URL to the plugin administration screen</li>
+<li>{ad_url} - The URL to the ad detail page</li>
+<li>{site_name} - Your site name</li>
+<li>{ad_type} - Either "For Sale" or "Wanted"</li>
+<li>{subject} - The subject of the ad</li>
+<li>{description} - The complete description field for the ad</li>
+<li>{price} - The price</li>
+<li>{cat} - The ad's category</li>
+</ul>
+<p />
+<h3>Credits</h3>
+Based on zClassified v.1.1 by:<br />
+Alan Zhao<love1001_98@yahoo.com><br />
+12/30/2001<br />
+http://www.xgra.com<br />
+<p />
+Original Geeklog Integration 14 Aug 2003 by:<br />           
+Robert Stadnik (geeklog@geeklog.now.pl) (http://geeklog.now.pl)<br />
+Ron Ackerman (ron@miplanet.net) (http://www.lafayetteoh.com)<br />
+<p />
+Adapted for GLFusion 1.0 with additional modifications by:<br />
+Lee Garner (lee@leegarner.com)<br />
+

@@ -1,0 +1,35 @@
+{# begin {templatelocation} #}
+<form action="{pi_admin_url}/index.php" method="POST">
+  <input type="hidden" name="type_id" value="{type_id}" />
+  <h2>{$LANG_ADVT['editadtypehdr']}</h2>
+
+  <table border="0">
+  <tr>
+    <td>{$LANG_ADVT['description']}: </td>
+    <td>
+      <input type=text name="descrip" value="{descrip}" size="70" 
+        maxlength="250" />
+    </td>
+  </tr>
+  <tr>
+    <td>{$LANG_ADVT['enabled']}: </td>
+    <td><input type=checkbox name="enabled" value=1 {ena_chk} /></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <input type="submit" name="saveadtype" 
+                value="{$LANG_ADMIN['submit']}" />
+      <input type="reset" value="{$LANG_CONFIG['reset_form']}" />
+      <input type="reset" value="{$LANG_ADMIN['cancel']}" name="cancel" 
+                onclick="javascript: document.location.href='{cancel_url}'" />
+      {!if show_del_btn}
+        <input type="submit" name="deleteadtype" 
+          value="{$LANG_ADMIN['delete']}" 
+          onclick="return confirm('{$LANG_ADVT['confirm_delitem']}');" />
+      {!endif}
+    </td>
+  </tr>
+  </table>
+</form>
+{# end {templatelocation} #}

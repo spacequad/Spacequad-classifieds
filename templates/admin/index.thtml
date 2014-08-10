@@ -1,0 +1,4 @@
+<h1>{$LANG_ADVT['admin_title']}</h1>
+{version}<br />
+{menu}
+{page_content}

@@ -1,0 +1,162 @@
+#rednote {
+  font-color: red;
+}
+
+/* Styles for the category box displays */
+.adcat {
+  position:relative;
+  float: left; /* grouped shared styles */
+  font-size: 1em;
+  padding: 0.5em 0.15em;
+  margin: 1em 0.15em -0.5em 0.15em; 
+  border: 3px outset #2e8b57;
+  width:125px;
+  /*height:180px;*/
+  min-height:180px;
+  font-family:Helvetica;
+  background: #90ee90;  /* default */
+}
+
+.adcat img {
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.adcat div.catTitle {
+  font-size: 1.3em;
+  font-weight: bold;
+  text-align: center;
+  font-color:#000000;
+  margin-bottom:2px;
+}
+
+.adcat div.catAdCount {
+  position:absolute;
+  bottom:3px;
+  left:3px;
+}
+
+.subcatTitle {
+  float: left; /* grouped shared styles */
+  font-size: 1em;
+  padding: .25em 0.25em .5em .25em;
+  margin: 0.15em 0.15em 0.15em 0.15em; 
+  border: 3px outset #2e8b57;
+  min-width:125px;
+  height:12px;
+  font-family:Helvetica;
+  font-color:#000000;
+  font-weight:bold;
+  background: #90ee90;  /* default */
+}
+
+.subcatTitle a {
+  text-decoration:none;
+}
+
+.adcat .catDesc {
+  font-size: 1em;
+  /*font-weight: bold;*/
+  text-align: left;
+  font-color:#000000;
+  margin-bottom:24px;
+}
+
+.catImage {
+  text-align: left;
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom: 10px;
+  width: 75px;
+  height: 75px;
+}
+
+img.RandBlock {
+  /*border-style:outset;
+  border-color: red;
+  border-width:10px;  */
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:6px;
+  display: block;
+}
+
+
+/* Color Picker Styles */
+.picker_layer {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+	background-color: #d4d0c8;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #666666;
+	overflow: visible;
+	height: auto;
+	width: auto;
+}
+.picker_buttons {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-color:#d4d0c8;
+	border-style:solid;
+	border-color:#666666;
+	border-width:1px;
+	padding:1px;
+	cursor:pointer;
+	color:#000000;
+}
+.cell_color {
+	cursor:pointer;
+	width:9px;
+	height:9px;
+}
+.color_table {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+}
+.choosed_color_cell{
+	border-style:solid; border-color:#000000; border-width:1px;
+}
+.default_color_btn{
+	width:17px; height:17px;
+	background-repeat:no-repeat; background-position:center;
+}
+
+.adForm label
+{
+    /*color: #781351;*/
+    width: 16em;
+    float: left;
+    text-align: right;
+    margin-right: 0.5em;
+    display: block;
+    vertical-align: bottom;
+}
+
+.adForm p {
+  line-height: 1px;
+  margin-top:0px;
+}
+
+.adForm td.label {
+    width:30%;
+    height:25px;
+    text-align:left;
+    font-weight:bold;
+}
+
+.adForm td.input {
+    width:40%;
+    height:25px;
+    text-align:left;
+}
+
+.adCatRoot {
+    background-color: lightblue;
+}
+
+.adBreadcrumb {
+    font-weight: bold;
+}

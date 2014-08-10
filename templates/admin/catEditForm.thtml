@@ -1,0 +1,134 @@
+{# begin {templatelocation} #}
+<script type="text/javascript">
+<!--
+window.addEvent('domready',function() {
+    var myValidator = new fValidator("submit");
+});
+-->
+</script>
+
+<form id="submit" enctype="multipart/form-data" method="post" 
+    action="?mode=update_cat&catid={cat_id}">
+  <input type="hidden" name="cat_id" value="{cat_id}" />
+  <table border=0>
+
+    <tr>
+      <td>
+        <b>{$LANG_ADVT['enter_cat']}:</b>
+      </td>
+      <td>
+        <input type="text" id="catname" class="fValidate['required']" 
+            name="cat_name" length="50" size="20" value="{catname}" />
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <b>{$LANG_ADVT['parent_cat']}:</b>
+      </td>
+      <td>
+        <select name="papa_id">
+          <option value="0">--{$LANG_ADVT['none']}--</option>
+          {sel_parent_cat}
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td><b>{$LANG_ADVT['description']}:</b></td>
+      <td>
+        <textarea id="descript" rows="2" name="description" cols="50" 
+            style="width:100%" maxlength="256">{description}</textarea>
+      </td>
+    </tr>
+
+    <tr>
+      <td><b>{$LANG_ADVT['keywords']}:</b></td>
+      <td>
+        <input type="text" name="keywords" length="255" size="50" 
+            value="{keywords}" />
+      </td>
+    </tr>
+
+    <tr>
+      <td><b>{$LANG_ADVT['image']}:</b><br />{$LANG_ADVT['icon_desc']}</td>
+      <td>
+        <input type="file" name="imagefile" />
+      </td>
+      {!if existing_image}
+      <td>
+        <img src="{existing_image}" width="48" height="48" /><br />
+          <a href="?mode=delcatimg&cat_id={cat_id}">{$LANG_ADVT['delete']}</a>
+      </td>
+      {!endif}
+    </tr>
+
+    <tr>
+      <td><b>{$LANG_ADVT['block_colors']}: </b></td>
+      <td>
+        <label for="fgcolor">{$LANG_ADVT['foreground']}: </label>
+        <input name="fgcolor" type="text" id="fgcolor" size="7" maxlength="7" 
+            value="{fgcolor}" style="background:{fgcolor}" /> 
+        <span onclick="openPicker('fgcolor')">
+          <img src="{site_url}/classifieds/images/colors.png">
+        </span>
+        <label for="bgcolor">{$LANG_ADVT['background']}: </label>
+        <input name="bgcolor" type="text" id="bgcolor" size="7" maxlength="7" 
+            value="{bgcolor}" style="background:{bgcolor}" /> 
+        <span onclick="openPicker('bgcolor')">
+          <img src="{site_url}/classifieds/images/colors.png" />
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td><b>{$LANG_ACCESS['owner']}:</b></td>
+      <td align="left">
+        {ownername}
+      </td>
+    </tr>
+
+    <tr>
+      <td><b>{$LANG_ACCESS['group']}:</b></td>
+      <td align="left">
+        {group_dropdown}
+      </td>
+    </tr>
+
+    <tr>
+      <td><b>{$LANG_ACCESS['permissions']}:</b></td>
+      <td align="left">
+        {permissions_editor}
+      </td>
+    </tr>
+
+    <tr>
+      <td><b>{$LANG_ADVT['prop_perms']}</b></td>
+      <td><input type="checkbox" name="propagate" value="1" /></td>
+    </tr>
+  </table>
+
+  <p>
+    <input type="hidden" name="owner_id" value="{owner_id}" />
+    <input type="submit" name="savecat" value="{$LANG_ADVT['upd_cat']}" />
+    <input type="reset" value="{$LANG_ADVT['reset']}" />
+    <input type="reset" value="{$LANG_ADMIN['cancel']}" name="cancel" 
+        onclick="javascript: document.location.href='{cancel_url}'" />
+    <input type="submit" name="deletecat" value="{$LANG_ADVT['delete']}" />
+  </p>
+  <hr />
+</form>
+
+<!--<form method="post" action="?mode=delcat">
+  <table border="0" cellpaddig="0" cellspacing="0" width="100%">
+    {catlist}
+    <tr>
+      <td align="center" width="100%" height="20" colspan="5">
+        <input type="submit" value="  {$LANG_ADVT['del_sel_cat']}  " />
+        <br />
+        <span class="alert">{$LANG_ADVT['warn_del_ads']}</span>
+      </td>
+    </tr>
+  </table>
+</form>-->
+{# begin {templatelocation} #}

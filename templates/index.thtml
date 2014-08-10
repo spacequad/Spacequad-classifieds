@@ -1,0 +1,8 @@
+{# begin{templatelocation} #}
+<h1>{header}</h1>
+{!if index_msg}
+  {index_msg}<br />
+{!endif}
+{menu}
+{content}
+{# end {templatelocation} #}

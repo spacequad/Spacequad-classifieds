@@ -1,0 +1,12 @@
+Hello, {username},
+<p />
+Your ad on {site_name} has been approved.
+<p />
+{ad_type}: {subject}<br />
+Description: {descript}<br />
+Price: {price}<br />
+<p />
+Category: {cat}<br />
+<p />
+Click <a href="{ad_url}">here</a> for more details.
+

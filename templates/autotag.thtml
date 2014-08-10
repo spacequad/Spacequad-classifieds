@@ -1,0 +1,20 @@
+{# begin {templatelocation} #}
+<!-- BEGIN tag_data -->
+<div style="clear:both;">
+  {!if img_url}
+  <div style="float:left;padding:10px;">
+    <a href="{img_url}/{img_file}" target="_blank" rel="slimbox[ad]" 
+      onclick="initLightbox()">
+      <img src="{img_url}/thumb/{img_file}" border="0" 
+          alt="{$LANG_ADVT[click_to_enlarge]}" 
+          title="{$LANG_ADVT[click_to_enlarge]}"
+          class="gl_mootip" {xhtml}>
+    </a>
+  </div>
+  {!endif}
+  <div style="float:left;">
+    <a href="{ad_url}">{subject}</a>
+  </div>
+</div>
+<!-- END tag_data -->
+{# end {templatelocation} #}

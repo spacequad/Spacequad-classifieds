@@ -1,0 +1,31 @@
+{# begin {templatelocation} #}
+{menu}
+<p {xhtml}>
+<div align="center">
+<center>
+  <table border="0" cellpaddig="0" cellspacing="0" width="100%">
+  <!-- BEGIN CatRows -->
+  {rowstart}
+    <td align="left" width="50%" valign="top">
+      <table border="0">
+        <tr>
+          <td valign="center" width=50>
+            {!if cat_image}
+              <img src="{cat_image}" width="48" height="48" align="left" {xhtml}>
+            {!endif}
+          </td>
+          <td valign="center">
+            <a href="{cat_url}"><b>{cat_name}</b></a>
+            &nbsp;({cat_ad_count})
+            <br {xhtml}>
+            {subcatlist}
+          </td>
+        </tr>
+      </table>
+    </td>
+  {rowend}
+  <!-- END CatRows -->
+  </table>
+</center>
+</div>
+{# end {templatelocation} #}

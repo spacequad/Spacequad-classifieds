@@ -1,0 +1,12 @@
+Hello, {username},
+<p />
+There is a new ad listed on {site_name}.
+<p />
+{ad_type}: {subject}<br />
+Description: {description}<br />
+Price: {price}<br />
+<p />
+Category: {cat}<br />
+<p />
+Click <a href="{ad_url}">here</a> for more details.
+
